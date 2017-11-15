@@ -119,6 +119,6 @@ INSERT INTO FICHA(idFicha, nomeFicha, hpTotal, hpAtual, xp, ac, movimento) VALUE
 
 INSERT INTO FICHA_HAS_STAT(idFicha, idStat, isProfSave, valorStat, BonusMiscStat) VALUES (1, 1, 0, 13, 0), (1, 2, 0, 16, 0);
 
-INSERT INTO FICHA_HAS_SKILL(idFicha, idSkill, isProf, BonusMiscSkill) VALUES (1, 1, 0, 0), (1, 2, 0, 0);
+INSERT INTO FICHA_HAS_SKILL(idFicha, idSkill, isProfSkill, BonusMiscSkill) VALUES (1, 1, 0, 0), (1, 2, 0, 0);
 
 INSERT INTO INVENTARIO(idFicha, nomeItem, descricao, quantidade) VALUES (1, 'Rapieira', 'Arma Marcial', 1), (1, 'Poção de Cura', 'Poção', 2)
