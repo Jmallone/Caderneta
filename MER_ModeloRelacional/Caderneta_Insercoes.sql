@@ -13,30 +13,30 @@ DROP TABLE IF EXISTS INVENTARIO;
 
  
 CREATE TABLE CLASSE(     
-    idClasse INTEGER PRIMARY KEY,    
+    idClasse INTEGER PRIMARY KEY AUTO_INCREMENT,    
     nomeClasse VARCHAR (30),  
     dadoVida INTEGER  
 ); 
  
 CREATE TABLE RACA(     
-    idRaca INTEGER PRIMARY KEY,    
+    idRaca INTEGER PRIMARY KEY AUTO_INCREMENT,    
     nomeRaca VARCHAR (30)
 ); 
  
 CREATE TABLE NIVEL(     
-    idNivel INTEGER PRIMARY KEY,    
+    idNivel INTEGER PRIMARY KEY AUTO_INCREMENT,    
     valorNivel INTEGER,
     bonusProf INTEGER,
     xpNec INTEGER
 ); 
  
 CREATE TABLE STAT(     
-    idStat INTEGER PRIMARY KEY,    
+    idStat INTEGER PRIMARY KEY AUTO_INCREMENT,    
     nomeStat VARCHAR (30)
 );
 
 CREATE TABLE SKILL(     
-    idSkill INTEGER PRIMARY KEY,    
+    idSkill INTEGER PRIMARY KEY AUTO_INCREMENT,    
     nomeSkill VARCHAR (30)
 );
 
@@ -49,18 +49,18 @@ CREATE TABLE DEP_SKILL(
 );  
 
 CREATE TABLE JOGADOR(     
-    idJogador INTEGER PRIMARY KEY,    
+    idJogador INTEGER PRIMARY KEY AUTO_INCREMENT,    
     nomeJogador VARCHAR (30),
     senha VARCHAR (30)
 );
 
 CREATE TABLE SALA(     
-    idSala INTEGER PRIMARY KEY,    
+    idSala INTEGER PRIMARY KEY AUTO_INCREMENT,    
     nomeSala VARCHAR (30)
 );
 
 CREATE TABLE FICHA(     
-    idFicha INTEGER PRIMARY KEY,    
+    idFicha INTEGER PRIMARY KEY AUTO_INCREMENT,    
     nomeFicha VARCHAR (30),
     hpTotal INTEGER,
     hpAtual INTEGER,
@@ -91,7 +91,7 @@ CREATE TABLE FICHA_HAS_SKILL(
 );
 
 CREATE TABLE INVENTARIO(  
-	idFicha INTEGER,
+	idFicha INTEGER AUTO_INCREMENT,
     nomeItem VARCHAR (30),
     descricao VARCHAR (100),
     quantidade INTEGER,
