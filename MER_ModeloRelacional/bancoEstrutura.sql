@@ -21,7 +21,7 @@ CREATE TABLE `ficha` (
   `Raca_idRaca` int(11) NOT NULL,
   `Jogador_idJogador` int(11) NOT NULL,
   `Classe_idClasse` int(10) UNSIGNED NOT NULL,
-  `Sala_idSala` int(11) NOT NULL,
+  `Sala_idSala` int(11),
   `Level_idlevel` int(11) NOT NULL,
   `nomeFicha` varchar(45) DEFAULT NULL,
   `vidatotalFicha` int(11) DEFAULT NULL,
