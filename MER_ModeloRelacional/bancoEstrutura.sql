@@ -6,9 +6,9 @@
 
 CREATE TABLE `classe` (
   `idClasse` int(10) UNSIGNED NOT NULL,
-  `nomeClasse` varchar(45) DEFAULT NULL,
-  `tipoDadoClasse` int(11) DEFAULT NULL
-)  ;
+  `nomeClasse` varchar(45) NOT NULL,
+  `dadoVida` int(11) DEFAULT NULL
+);
 
 -- --------------------------------------------------------
 
@@ -29,7 +29,7 @@ CREATE TABLE `ficha` (
   `xpFicha` int(11) DEFAULT NULL,
   `armorclassFicha` int(11) DEFAULT NULL,
   `speedFicha` int(11) DEFAULT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -41,7 +41,7 @@ CREATE TABLE `ficha_has_status` (
   `Ficha_idFicha` int(10) UNSIGNED NOT NULL,
   `Status_idStatus` int(11) NOT NULL,
   `valor` int(11) DEFAULT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -54,7 +54,7 @@ CREATE TABLE `inventario` (
   `Ficha_idFicha` int(10) UNSIGNED NOT NULL,
   `descricaoInventario` varchar(255) DEFAULT NULL,
   `quantidadeInventario` int(11) DEFAULT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -66,20 +66,20 @@ CREATE TABLE `jogador` (
   `idJogador` int(11) NOT NULL,
   `nomeJogador` varchar(45) DEFAULT NULL,
   `senhaJogador` varchar(45) DEFAULT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `level`
+-- Estrutura da tabela `nivel`
 --
 
-CREATE TABLE `level` (
-  `idlevel` int(11) NOT NULL,
-  `valorLevel` int(11) DEFAULT NULL,
-  `proficienciabonusLevel` int(11) DEFAULT NULL,
-  `xpnecessarioLevel` int(11) DEFAULT NULL
-)  ;
+CREATE TABLE `nivel` (
+  `idNivel` int(11) NOT NULL,
+  `valorNivel` int(11) DEFAULT NULL,
+  `bonusProf` int(11) DEFAULT NULL,
+  `xpNec` int(11) DEFAULT NULL
+);
 
 -- --------------------------------------------------------
 
@@ -90,7 +90,7 @@ CREATE TABLE `level` (
 CREATE TABLE `raca` (
   `idRaca` int(11) NOT NULL,
   `nomeRaca` varchar(45) DEFAULT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ CREATE TABLE `sala` (
   `idSala` int(11) NOT NULL,
   `nomeSala` varchar(45) DEFAULT NULL,
   `Jogador_idJogador` int(11) NOT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `skill` (
   `idSkill` int(11) NOT NULL,
   `nomeSkill` varchar(45) DEFAULT NULL,
   `Status_idStatus` int(11) NOT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,7 @@ CREATE TABLE `skill_has_ficha` (
   `Skill_idSkill` int(11) NOT NULL,
   `Ficha_idFicha` int(10) UNSIGNED NOT NULL,
   `prof` tinyint(1) DEFAULT NULL
-)  ;
+);
 
 -- --------------------------------------------------------
 
@@ -137,7 +137,7 @@ CREATE TABLE `skill_has_ficha` (
 CREATE TABLE `status` (
   `idStatus` int(11) NOT NULL,
   `nomeStatus` varchar(45) DEFAULT NULL
-)  ;
+);
 
 --
 -- Indexes for dumped tables
@@ -182,10 +182,10 @@ ALTER TABLE `jogador`
   ADD PRIMARY KEY (`idJogador`);
 
 --
--- Indexes for table `level`
+-- Indexes for table `nivel`
 --
-ALTER TABLE `level`
-  ADD PRIMARY KEY (`idlevel`);
+ALTER TABLE `nivel`
+  ADD PRIMARY KEY (`idNivel`);
 
 --
 -- Indexes for table `raca`
@@ -222,6 +222,58 @@ ALTER TABLE `status`
   ADD PRIMARY KEY (`idStatus`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `classe`
+--
+ALTER TABLE `classe`
+  MODIFY `idClasse` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ficha`
+--
+ALTER TABLE `ficha`
+  MODIFY `idFicha` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jogador`
+--
+ALTER TABLE `jogador`
+  MODIFY `idJogador` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `nivel`
+--
+ALTER TABLE `nivel`
+  MODIFY `idNivel` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `raca`
+--
+ALTER TABLE `raca`
+  MODIFY `idRaca` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sala`
+--
+ALTER TABLE `sala`
+  MODIFY `idSala` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `skill`
+--
+ALTER TABLE `skill`
+  MODIFY `idSkill` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `status`
+--
+ALTER TABLE `status`
+  MODIFY `idStatus` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -231,7 +283,7 @@ ALTER TABLE `status`
 ALTER TABLE `ficha`
   ADD CONSTRAINT `fk_Ficha_Classe1` FOREIGN KEY (`Classe_idClasse`) REFERENCES `classe` (`idClasse`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Ficha_Jogador1` FOREIGN KEY (`Jogador_idJogador`) REFERENCES `jogador` (`idJogador`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Ficha_Level1` FOREIGN KEY (`Level_idlevel`) REFERENCES `level` (`idlevel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Ficha_Level1` FOREIGN KEY (`Level_idlevel`) REFERENCES `nivel` (`idNivel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Ficha_Raca` FOREIGN KEY (`Raca_idRaca`) REFERENCES `raca` (`idRaca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Ficha_Sala1` FOREIGN KEY (`Sala_idSala`) REFERENCES `sala` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -266,4 +318,3 @@ ALTER TABLE `skill`
 ALTER TABLE `skill_has_ficha`
   ADD CONSTRAINT `fk_Skill_has_Ficha_Ficha1` FOREIGN KEY (`Ficha_idFicha`) REFERENCES `ficha` (`idFicha`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Skill_has_Ficha_Skill1` FOREIGN KEY (`Skill_idSkill`) REFERENCES `skill` (`idSkill`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
