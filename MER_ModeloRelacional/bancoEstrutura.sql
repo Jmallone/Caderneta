@@ -285,7 +285,7 @@ ALTER TABLE `ficha`
   ADD CONSTRAINT `fk_Ficha_Jogador1` FOREIGN KEY (`Jogador_idJogador`) REFERENCES `jogador` (`idJogador`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Ficha_Level1` FOREIGN KEY (`Level_idlevel`) REFERENCES `nivel` (`idNivel`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Ficha_Raca` FOREIGN KEY (`Raca_idRaca`) REFERENCES `raca` (`idRaca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Ficha_Sala1` FOREIGN KEY (`Sala_idSala`) REFERENCES `sala` (`idSala`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Ficha_Sala1` FOREIGN KEY (`Sala_idSala`) REFERENCES `sala` (`idSala`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Limitadores para a tabela `ficha_has_status`
