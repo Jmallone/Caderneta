@@ -18,6 +18,6 @@ INSERT INTO `ficha` (`idFicha`, `Raca_idRaca`, `Jogador_idJogador`, `Classe_idCl
 
 INSERT INTO `ficha_has_status` (`Ficha_idFicha`, `Status_idStatus`, `valor`) VALUES ('2', '1', '11'),('2', '2', '10'),('2', '3', '9'),('2', '4', '8'),('2', '5', '7'),('1', '1', '11'),('1', '2', '10'),('1', '3', '9'),('1', '4', '8'),('1', '5', '7');
 
-INSERT INTO `skill_has_ficha` (`Skill_idSkill`, `Ficha_idFicha`, `prof`) VALUES ('2', '2', '0'), ('1', '2', '0'), ('3', '2', '5'), ('2', '1', '1'), ('1', '1', '0'), ('3', '1', '8')
+INSERT INTO `skill_has_ficha` (`Skill_idSkill`, `Ficha_idFicha`, `prof`) VALUES ('2', '2', '0'), ('1', '2', '0'), ('3', '2', '5'), ('2', '1', '1'), ('1', '1', '0'), ('3', '1', '8');
 
 INSERT INTO `inventario` (`NomeInventario`, `Ficha_idFicha`, `descricaoInventario`, `quantidadeInventario`) VALUES ('maca', '1', 'Recupera 1 de Vida', '5'), ('Rapieira', '1', '+1 de Dano', '1'), ('pocao de Cura', '2', 'Cura 10+ de vida', '2'), ('Pocao de Veneno', '1', 'Não Cura +10 de vida', '1');
