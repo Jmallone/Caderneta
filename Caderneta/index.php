@@ -187,7 +187,7 @@
       </div>
       <!-- /.navbar-collapse -->
     </nav>
-    <?php include $_GET["site"].".php";  ?>
+    <?php include 'conexao.php';  include $_GET["site"].".php";   ?>
     <!-- /.container-fluid -->
 
   </div>

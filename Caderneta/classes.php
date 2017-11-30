@@ -93,13 +93,13 @@
               // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>
-                <td><span id='editSpan'>" . $row["idClasse"]."</span></td>
-                <td><p onclick='editTitle(".$row["idClasse"]."-1)' class='intro' ><span>" . $row["nomeClasse"]. "</span></p></td>
-                <td><span>" . $row["dadoVida"]. "</span></p></td>
-                <td class='actions'>
-                <a class='btn btn-warning btn-xs' href='?site=classeseditar&id=" . $row["idClasse"]."&nome=" . $row["nomeClasse"]. "&hitdice=" . $row["dadoVida"]. "'>Editar</a>
-                <a class='btn btn-danger btn-xs'  href='?site=classes&op=2&id=" . $row["idClasse"]."' data-toggle='modal' >Excluir</a>
-                </td>
+                        <td><span id='editSpan'>" . $row["idClasse"]."</span></td>
+                        <td><p onclick='editTitle(".$row["idClasse"]."-1)' class='intro' ><span>" . $row["nomeClasse"]. "</span></p></td>
+                        <td><span>" . $row["dadoVida"]. "</span></p></td>
+                        <td class='actions'>
+                        <a class='btn btn-warning btn-xs' href='?site=classeseditar&id=" . $row["idClasse"]."&nome=" . $row["nomeClasse"]. "&hitdice=" . $row["dadoVida"]. "'>Editar</a>
+                        <a class='btn btn-danger btn-xs'  href='?site=classes&op=2&id=" . $row["idClasse"]."' data-toggle='modal' >Excluir</a>
+                        </td>
                 </tr>";
 
 
