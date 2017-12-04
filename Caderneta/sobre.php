@@ -123,7 +123,50 @@
 
 
 <table class="table table-striped table-inverse">
-  <h1> Nome do Bard com maior HP </h1>
+  <h1> Nome do Personagem com maior HP a partir da classe:</h1>
+
+
+    <form name="Cadastro" action="" method="GET">
+      <td><input style="display: none;" name="site" value='sobre'></td>
+      <td><input style="display: none;" name="op" value='1'></td>
+      <select class="form-control selectpicker" style="width: 21%;" name="classe">
+
+                        <?php
+                        $sql = "SELECT nomeClasse from classe";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                          // output data of each row
+                          while($row = $result->fetch_assoc()) {
+                            echo "
+                            <option value='" . $row["nomeClasse"]."'>" . $row["nomeClasse"]. "</option>";
+                              ///// ON DELETE SET NULL
+
+                          }
+                        } else {
+                          echo "0 results";
+                        }
+
+                        ?>
+
+
+
+
+                      </select>
+
+                      <input type="submit"  class="btn btn-success x" value="OK" href=""/>
+                    </form>
+
+
+
+
+
+
+
+
+
+
+
   <thead class="thead-inverse">
     <tr>
       <th>Nome da Ficha</th>
@@ -134,13 +177,15 @@
   <tbody>
 
     <?php
+    if(isset($_GET["op"]) && $_GET["op"] == 1){
+
     $sql = "SELECT F.nomeFicha, F.vidatotalFicha, J.nomeJogador
-    FROM FICHA F, CLASSE C, JOGADOR J
+    FROM ficha F, classe C, jogador J
     WHERE F.Classe_idClasse = C.idClasse
     AND J.idJogador = F.Jogador_idJogador
-    AND C.nomeClasse = 'Bard'
+    AND C.nomeClasse = '".$_GET["classe"]."'
     AND F.vidatotalFicha IN (SELECT MAX(F.vidatotalFicha)
-    				         FROM FICHA F)";
+    				         FROM ficha F)";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -156,7 +201,7 @@
     } else {
       echo "Nao encontrado";
     }
-
+}
     ?>
 
   </tbody>
@@ -176,12 +221,12 @@
 
     <?php
     $sql = "SELECT C.nomeClasse, F.nomeFicha, F.level_idLevel, J.nomeJogador
-FROM FICHA F, CLASSE C, NIVEL N, JOGADOR J
+FROM ficha F, classe C, nivel N, jogador J
 WHERE F.Classe_idClasse = C.idClasse
 AND J.idJogador = F.Jogador_idJogador
 AND F.level_idLevel = N.idNivel
 AND N.valorNivel IN (SELECT MAX(N.valorNivel)
-				    FROM NIVEL N, FICHA F
+				    FROM nivel N, ficha F
                     WHERE N.idNivel = F.level_idLevel)";
     $result = $conn->query($sql);
 
@@ -216,7 +261,7 @@ AND N.valorNivel IN (SELECT MAX(N.valorNivel)
 
     <?php
     $sql = "SELECT F.idFicha, F.nomeFicha
-FROM FICHA F, CLASSE C
+FROM ficha F, classe C
 WHERE F.Classe_idClasse = C.idClasse
 AND C.nomeClasse = 'Cleric'";
     $result = $conn->query($sql);
@@ -242,7 +287,39 @@ AND C.nomeClasse = 'Cleric'";
 
 <br><br><br>
 <table class="table table-striped table-inverse">
-  <h1> Classes de todas as Fichas de Raça "ELf" </h1>
+  <h1> Classes de todas as Fichas de Raça
+    <form name="Cadastro" action="" method="GET">
+      <td><input style="display: none;" name="site" value='sobre'></td>
+      <td><input style="display: none;" name="op" value='2'></td>
+      <td><input style="display: none;" name="" value='#raca'></td>
+      <select class="form-control selectpicker" name="raca">
+
+                        <?php
+                        $sql = "SELECT idRaca, nomeRaca from raca";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                          // output data of each row
+                          while($row = $result->fetch_assoc()) {
+                            echo "
+                            <option value='" . $row["nomeRaca"]."'>" . $row["nomeRaca"]. "</option>";
+                              ///// ON DELETE SET NULL
+
+                          }
+                        } else {
+                          echo "0 results";
+                        }
+
+                        ?>
+
+
+
+
+                      </select>
+
+                      <input type="submit"  class="btn btn-success x" value="OK" href=""/>
+                    </form>
+                     </h1>
   <thead class="thead-inverse">
     <tr>
       <th>Nome da Classe</th>
@@ -252,11 +329,12 @@ AND C.nomeClasse = 'Cleric'";
   <tbody>
 
     <?php
+    if(isset($_GET["op"]) && $_GET["op"] == 2){
     $sql = "SELECT C.nomeClasse, F.nomeFicha
-FROM CLASSE C, FICHA F, RACA R
+FROM classe C, ficha F, raca R
 WHERE C.idClasse = F.Classe_idClasse
 AND F.Raca_idRaca = R.idRaca
-AND R.NomeRaca = 'ELf' ";
+AND R.NomeRaca = '".$_GET["raca"]."' ";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -271,7 +349,7 @@ AND R.NomeRaca = 'ELf' ";
     } else {
       echo "Nao encontrado";
     }
-
+}
     ?>
 
   </tbody>
@@ -289,7 +367,7 @@ AND R.NomeRaca = 'ELf' ";
 
     <?php
     $sql = "SELECT I.NomeInventario
-FROM FICHA F, INVENTARIO I
+FROM ficha F, inventario I
 WHERE F.idFicha = I.Ficha_idFicha
 AND F.idFicha = '1'";
     $result = $conn->query($sql);
@@ -316,7 +394,7 @@ AND F.idFicha = '1'";
 
 <br><br><br>
 <table class="table table-striped table-inverse">
-  <h1>  Itens por Ficha </h1>
+  <h1>  Quantidade de Itens por Ficha </h1>
   <thead class="thead-inverse">
     <tr>
       <th>Nome da Ficha</th>
@@ -335,6 +413,40 @@ where I.Ficha_idFicha = F.idFicha GROUP BY F.nomeFicha ";
       while($row = $result->fetch_assoc()) {
         echo "    <tr>
               <td>".$row["nomeFicha"]."</td>
+              <td>".$row["COUNT(F.nomeFicha)"]."</td>
+            </tr>";
+
+      }
+    } else {
+      echo "Nao encontrado";
+    }
+
+    ?>
+
+  </tbody>
+</table>
+
+<br><br><br>
+<table class="table table-striped table-inverse">
+  <h1>  Quantidade de Fichas criadas por jogadores </h1>
+  <thead class="thead-inverse">
+    <tr>
+      <th>Nome do Jogador</th>
+      <th>Quantidade de Fichas</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php
+    $sql = "SELECT COUNT(F.nomeFicha), J.nomeJogador from ficha F, jogador J
+where F.Jogador_idJogador = J.idJogador GROUP BY F.nomeFicha ";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "    <tr>
+              <td>".$row["nomeJogador"]."</td>
               <td>".$row["COUNT(F.nomeFicha)"]."</td>
             </tr>";
 
