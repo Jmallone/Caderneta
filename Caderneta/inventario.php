@@ -29,7 +29,8 @@
           <tbody>
 
             <?php
-            $sql = "select distinct J.nomeJogador,F.idFicha,f.nomeFicha, J.idJogador from inventario I, Ficha F, jogador J
+            $sql = "select distinct J.nomeJogador,F.idFicha,F.nomeFicha, J.idJogador
+from inventario I, ficha F, jogador J
             where I.Ficha_idFicha = F.idFicha
             and F.Jogador_idJogador = J.idJogador";
             $result = $conn->query($sql);
@@ -53,7 +54,7 @@
                             <div id='collapse" . $row["idJogador"]."' class='panel-collapse collapse'>
                             ";
 
-                                $sql2 = "select I.NomeInventario, J.nomeJogador from inventario I, Ficha F, jogador J
+                                $sql2 = "select I.NomeInventario, J.nomeJogador from inventario I, ficha F, jogador J
                                     where I.Ficha_idFicha = F.idFicha
                                     and F.Jogador_idJogador = J.idJogador
                                     and J.idJogador = '" . $row["idJogador"]."' LIMIT 2 ";

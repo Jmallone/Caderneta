@@ -209,7 +209,7 @@
 </table>
 <br><br><br>
 <table class="table table-striped table-inverse">
-  <h1> Classes Com os maiores Nível </h1>
+  <h1> Fichas Com os maiores Nível </h1>
   <thead class="thead-inverse">
     <tr>
       <th>Nome da Ficha</th>
@@ -493,6 +493,160 @@ where S.Jogador_idJogador = J.idJogador GROUP BY J.nomeJogador ";
 
   </tbody>
 </table>
+
+
+
+<br><br><br>
+<table class="table table-striped table-inverse">
+  <h1>Ficha com menos HP Atual:</h1>
+
+
+  <form name="Cadastro" action="" method="GET">
+    <td><input style="display: none;" name="site" value='sobre'></td>
+    <td><input style="display: none;" name="op" value='3'></td>
+    <select class="form-control selectpicker" style="width: 21%;" name="sala">
+
+                      <?php
+                      $sql = "SELECT idSala, nomeSala from sala";
+                      $result = $conn->query($sql);
+
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                          echo "
+                          <option value='" . $row["idSala"]."'>" . $row["nomeSala"]. "</option>";
+                            ///// ON DELETE SET NULL
+
+                        }
+                      } else {
+                        echo "0 results";
+                      }
+
+                      ?>
+
+
+
+
+                    </select>
+
+                    <input type="submit"  class="btn btn-success x" value="OK" href=""/>
+                  </form>
+
+
+
+
+    <thead class="thead-inverse">
+    <tr>
+      <th>Nome do Jogador</th>
+      <th>Quantidade de HP</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php
+
+
+    if(isset($_GET["op"]) && $_GET["op"] == 3){
+    $sql = "SELECT F.nomeFicha, F.vidaatualFicha from ficha F
+where F.Sala_idSala = '".$_GET["sala"]."'
+and F.vidaatualFicha in ( select MIN(F.vidaatualFicha) from ficha F)";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "    <tr>
+              <td>".$row["nomeFicha"]."</td>
+              <td>".$row["vidaatualFicha"]."</td>
+            </tr>";
+
+      }
+    } else {
+      echo "Nao encontrado";
+    }
+  }
+
+    ?>
+
+  </tbody>
+</table>
+
+
+
+
+<br><br><br>
+<table class="table table-striped table-inverse">
+  <h1>Media do XP por Sala:</h1>
+
+
+  <form name="Cadastro" action="" method="GET">
+    <td><input style="display: none;" name="site" value='sobre'></td>
+    <td><input style="display: none;" name="op" value='4'></td>
+    <select class="form-control selectpicker" style="width: 21%;" name="sala">
+
+                      <?php
+                      $sql = "SELECT idSala, nomeSala from sala";
+                      $result = $conn->query($sql);
+
+                      if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                          echo "
+                          <option value='" . $row["idSala"]."'>" . $row["nomeSala"]. "</option>";
+                            ///// ON DELETE SET NULL
+
+                        }
+                      } else {
+                        echo "0 results";
+                      }
+
+                      ?>
+
+
+
+
+                    </select>
+
+                    <input type="submit"  class="btn btn-success x" value="OK" href=""/>
+                  </form>
+
+
+
+
+    <thead class="thead-inverse">
+    <tr>
+      <th>Media</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php
+
+
+    if(isset($_GET["op"]) && $_GET["op"] == 4){
+    $sql = "select AVG(F.xpFicha) from sala S, ficha F
+where F.Sala_idSala = '".$_GET["sala"]."'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "    <tr>
+              <td>".$row["AVG(F.xpFicha)"]."</td>
+            </tr>";
+
+      }
+    } else {
+      echo "Nao encontrado";
+    }
+  }
+
+    ?>
+
+  </tbody>
+</table>
+
+
 
 <!-- /.row -->
 

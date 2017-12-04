@@ -44,7 +44,7 @@
             <?php
 
             $sql = "SELECT F.idFicha, F.nomeFicha,J.nomeJogador, C.nomeClasse, F.Level_idlevel
-FROM FICHA F, CLASSE C,JOGADOR J
+FROM ficha F, classe C,jogador J
 WHERE F.Classe_idClasse = C.idClasse
 AND J.idJogador = F.Jogador_idJogador ";
             $result = $conn->query($sql);

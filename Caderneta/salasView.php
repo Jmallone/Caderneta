@@ -41,7 +41,7 @@
                   <div class="row">
                     <select class="form-control selectpicker" name="novoJogador">
                       <?php
-                      $sql = "SELECT  F.idFicha,J.nomeJogador, F.nomeFicha from ficha F, Jogador J
+                      $sql = "SELECT  F.idFicha,J.nomeJogador, F.nomeFicha from ficha F, jogador J
                       where F.Jogador_idJogador = J.idJogador and .F.idFicha not in(
                         select F.idFicha from ficha F, jogador J, sala S
                         where J.idJogador = F.Jogador_idJogador
