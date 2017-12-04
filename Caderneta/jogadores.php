@@ -28,41 +28,43 @@
 
                 <div id="BoxNovoBotao" onclick="Mudarestado('minhaDiv')">
 
-                  <a href="#" class="btn btn-primary h2">Novo Jogador</a>
+                  <a href="#" class="btn btn-primary h2">Adicionar Jogador</a>
                 </div>
 
 
               </th>
+
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Lucas</td>
-              <td class="actions">
-                <a class="btn btn-info btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Visualizar</a>
-                <a class="btn btn-warning btn-xs" href="edit.html">Editar</a>
-                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Michel</td>
-              <td class="actions">
-                <a class="btn btn-info btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Visualizar</a>
-                <a class="btn btn-warning btn-xs" href="edit.html">Editar</a>
-                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Darlan</td>
-              <td class="actions">
-                <a class="btn btn-info btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Visualizar</a>
-                <a class="btn btn-warning btn-xs" href="edit.html">Editar</a>
-                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-              </td>
-            </tr>
+
+
+            <?php
+
+            $sql = "SELECT J.idJogador, J.nomeJogador
+FROM JOGADOR J";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                echo "<tr>
+                <td><span id='editSpan'>" . $row["idJogador"]."</span></td>
+                <td><p class='intro' >" . $row["nomeJogador"]. "</p></td>
+                <td class='actions'>
+                  <a class='btn btn-info btn-xs'  href='' data-toggle='modal'>Visualizar</a>
+                <a class='btn btn-warning btn-xs' href=''>Editar</a>
+                <a class='btn btn-danger btn-xs'  href='' data-toggle='modal' >Excluir</a>
+                </td>
+                </tr>";
+
+
+              }
+            } else {
+              echo "0 results";
+            }
+            $conn->close();
+            ?>
 
           </tbody>
         </table>

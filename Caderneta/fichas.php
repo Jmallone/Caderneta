@@ -17,6 +17,7 @@
             <i class="fa fa-file"></i> Fichas
           </li>
         </ol>
+
         <table class="table table-hover">
           <thead>
             <tr>
@@ -29,7 +30,7 @@
 
                 <div id="BoxNovoBotao" onclick="Mudarestado('minhaDiv')">
 
-                  <a href="#" class="btn btn-primary h2">Adicionar Fichas</a>
+                  <a href="#" class="btn btn-primary h2">Adicionar Ficha</a>
                 </div>
 
 
@@ -38,42 +39,45 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Zuran</td>
-              <td>Danilo</td>
-              <td>Druid - 6</td>
-              <td class="actions">
-                <a class="btn btn-info btn-xs"  href="?site=fichasView" >Visualizar</a>
-                <a class="btn btn-warning btn-xs" href="edit.html">Editar</a>
-                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Art</td>
-              <td>Michel</td>
-              <td>Bard - 6</td>
-              <td class="actions">
-                <a class="btn btn-info btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Visualizar</a>
-                <a class="btn btn-warning btn-xs" href="edit.html">Editar</a>
-                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Dran</td>
-              <td>Lucas</td>
-              <td>Monk - 6</td>
-              <td class="actions">
-                <a class="btn btn-info btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Visualizar</a>
-                <a class="btn btn-warning btn-xs" href="edit.html">Editar</a>
-                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-              </td>
-            </tr>
+
+
+            <?php
+
+            $sql = "SELECT F.idFicha, F.nomeFicha,J.nomeJogador, C.nomeClasse, F.Level_idlevel
+FROM FICHA F, CLASSE C,JOGADOR J
+WHERE F.Classe_idClasse = C.idClasse
+AND J.idJogador = F.Jogador_idJogador ";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              // output data of each row
+              while($row = $result->fetch_assoc()) {
+                echo "<tr>
+                <td><span id='editSpan'>" . $row["idFicha"]."</span></td>
+                <td><p class='intro' >" . $row["nomeFicha"]. "</p></td>
+                <td><p class='intro' ><span>" . $row["nomeJogador"]. "</p></td>
+                <td><p class='intro' ><span>" . $row["nomeClasse"]. " / " . $row["Level_idlevel"]. "</p></td>
+                <td class='actions'>
+                  <a class='btn btn-info btn-xs'  href='' data-toggle='modal'>Visualizar</a>
+                <a class='btn btn-warning btn-xs' href=''>Editar</a>
+                <a class='btn btn-danger btn-xs'  href='' data-toggle='modal' >Excluir</a>
+                </td>
+                </tr>";
+
+
+              }
+            } else {
+              echo "0 results";
+            }
+            $conn->close();
+            ?>
 
           </tbody>
         </table>
+
+
+
+
 
       </div>
     </div>

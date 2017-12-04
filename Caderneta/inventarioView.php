@@ -100,7 +100,7 @@
 
             }
 
-            $sql = "select F.idFicha,I.NomeInventario, J.nomeJogador, I.quantidadeInventario from inventario I, Ficha F, jogador J
+            $sql = "select F.idFicha,I.NomeInventario, J.nomeJogador,I.Ficha_idFicha, I.quantidadeInventario, I.descricaoInventario from inventario I, Ficha F, jogador J
                       where I.Ficha_idFicha = F.idFicha
                       and F.Jogador_idJogador = J.idJogador
                       and J.idJogador = '".$_GET["id"]."'";
@@ -112,8 +112,8 @@
                 echo "<tr>
                 <td><span id='editSpan'>" . $row["NomeInventario"]."</span></td>
                 <td><p class='intro' >" . $row["quantidadeInventario"]. "</p></td>
-                <td><p class='intro' >" . $row["idFicha"]. "</p></td>
                 <td class='actions'>
+                <a class='btn btn-warning btn-xs' href='?site=inventarioEditar&id=" . $row["NomeInventario"]."&qtd=" . $row["quantidadeInventario"]. "&desc=" . $row["descricaoInventario"]. "&idFicha=" . $row["Ficha_idFicha"]. "'>Editar</a>
                 <a class='btn btn-danger btn-xs'  href='?site=inventarioView&op=2&nomeItem=" . $row["NomeInventario"]."&id=".$row["idFicha"]."&nomeJogador=".$_GET["nomeJogador"]."' data-toggle='modal' >Excluir</a>
                 </td>
                 </tr>";
