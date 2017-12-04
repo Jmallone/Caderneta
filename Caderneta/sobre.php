@@ -460,6 +460,40 @@ where F.Jogador_idJogador = J.idJogador GROUP BY F.nomeFicha ";
   </tbody>
 </table>
 
+<br><br><br>
+<table class="table table-striped table-inverse">
+  <h1>  Quantidade de Salas criadas por jogadores </h1>
+  <thead class="thead-inverse">
+    <tr>
+      <th>Nome do Jogador</th>
+      <th>Quantidade de Salas</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php
+    $sql = "SELECT J.nomeJogador, COUNT(J.nomeJogador) FROM sala S, jogador J
+where S.Jogador_idJogador = J.idJogador GROUP BY J.nomeJogador ";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "    <tr>
+              <td>".$row["nomeJogador"]."</td>
+              <td>".$row["COUNT(J.nomeJogador)"]."</td>
+            </tr>";
+
+      }
+    } else {
+      echo "Nao encontrado";
+    }
+
+    ?>
+
+  </tbody>
+</table>
+
 <!-- /.row -->
 
             </div>
