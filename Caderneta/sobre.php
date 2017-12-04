@@ -310,6 +310,44 @@ AND F.idFicha = '1'";
 
   </tbody>
 </table>
+
+
+
+
+<br><br><br>
+<table class="table table-striped table-inverse">
+  <h1>  Itens por Ficha </h1>
+  <thead class="thead-inverse">
+    <tr>
+      <th>Nome da Ficha</th>
+      <th>Quantidade de Item</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php
+    $sql = "SELECT F.nomeFicha, COUNT(F.nomeFicha)from inventario I, ficha F
+where I.Ficha_idFicha = F.idFicha GROUP BY F.nomeFicha ";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+        echo "    <tr>
+              <td>".$row["nomeFicha"]."</td>
+              <td>".$row["COUNT(F.nomeFicha)"]."</td>
+            </tr>";
+
+      }
+    } else {
+      echo "Nao encontrado";
+    }
+
+    ?>
+
+  </tbody>
+</table>
+
 <!-- /.row -->
 
             </div>
